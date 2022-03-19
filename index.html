@@ -21,6 +21,7 @@
     </header>
     <main>
         <div id="content" class="container p-2"></div>
+        <!-- Modal para aguardar a requisição acontecer-->
         <div class="modal bg-secondary opacity-50" id="modal-aguardar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered d-flex justify-content-center">
                 <div class="text-center">
@@ -30,7 +31,21 @@
                     <h5 class="text-light">Aguarde...</h5>
                 </div>
             </div>
-        </div>        
+        </div>
+        <!-- Modal para a parte de fotos-->
+        <div id="modalFotos" class="modal bg-dark bg-opacity-50" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content w-auto h-auto">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tituloModal"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="fecharModalFoto()"></button>
+                    </div>
+                    <div class="modal-body p-0">
+                        <img src="" alt="foto generica" id="fotoModal">
+                    </div>
+                </div>
+            </div>
+          </div>
     </main>
 
 

@@ -21,7 +21,7 @@ $('#sl-opt').change(function(event){
             });
           },
           error: function(data){
-            alert("Erro: " + data.status);
+            alert("Erro na requisição: " + data.status);
           },
           complete: function(){
             fecharModal();
@@ -56,7 +56,7 @@ $('#sl-opt').change(function(event){
           });
         },
         error: function(data){
-          alert("Erro: " + data.status);
+          alert("Erro na requisição: " + data.status);
         },
         complete: function(){
           fecharModal();
@@ -65,6 +65,29 @@ $('#sl-opt').change(function(event){
       break;
     case "photos":
       abrirModal();
+      $.ajax({
+        url: "https://jsonplaceholder.typicode.com/photos",
+        type: "GET",
+        dataType: "json",
+        success: function(data){
+          $(`<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4" id="photo-content"></div>`).appendTo("#content");
+          data.forEach(element =>{
+            $(`
+              <div class="col">
+                <div class="card shadow-sm" style="width: 300px;height: 300px" onclick="abrirModalFoto('${element.title}','${element.url}')">
+                  <img src="${element.thumbnailUrl}" alt="foto generica" class="img-thumbnail" style="width: 300px;height: 300px">
+                </div>
+              </div>
+            `).appendTo('#photo-content');
+          });
+        },
+        error: function(data){
+          alert("Erro na requisição: " + data.status);
+        },
+        complete: function(){
+          fecharModal();
+        }
+      });
       break;
     default:
       alert("Por favor, selecione uma opção!");
@@ -76,4 +99,12 @@ function abrirModal(){
 }
 function fecharModal(){
   $('#modal-aguardar').hide();
+}
+function abrirModalFoto(title,url){
+  $('#tituloModal').text(title);
+  $('#fotoModal').prop('src',url);
+  $('#modalFotos').show();
+}
+function fecharModalFoto(){
+  $('#modalFotos').hide();
 }
